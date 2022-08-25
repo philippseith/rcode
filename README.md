@@ -10,7 +10,7 @@ You are connected via terminal and you want to edit the current folder with vsco
 
 ## Usage
 Run `rcode -address host:port -remote someremote` on the the host and
-just `curl -d "path" -X PUT http://host/api/rcode:port` on the remote named `someremote` in your vscode Remote Explorer,
+just `curl -d "path" -X PUT http://host:port/api/rcode` on the remote named `someremote` in your vscode Remote Explorer,
 where `path` is the absolute path you want to open in vscode.
 
 ## Next
