@@ -18,23 +18,26 @@ It helps you if you are connected via terminal and you want to edit the current 
 Usage:
 Run 'rcode -address host:port -remote someremote' on the the host and
 'curl -d "path" -X PUT http://host:port' on the remote named 'someremote' in your vscode Remote Explorer, 
-where 'path' is the path you want to open in vscode.
+where 'path' is the absolute path you want to open in vscode.
+
 `)
 		flag.PrintDefaults()
 	}
 	var address, remoteName, code string
-	flag.StringVar(&address, "address", "10.0.0.2:49374", "address to bind the server to")
+	flag.StringVar(&address, "address", "", "address to bind the server to")
 	flag.StringVar(&remoteName, "remoteName", "", "name of the remote in vscode remote explorer")
 	flag.StringVar(&code, "code", "code", "how to invoke Visual Studio Code")
 	flag.Parse()
 
 	_, _, err := net.SplitHostPort(address)
 	if err != nil {
-		fmt.Printf("address: %v\n", err)
+		fmt.Printf("address: %v\n\n", err)
+		flag.Usage()
 		return
 	}
 	if remoteName == "" {
-		fmt.Println("remoteName: Should not be empty")
+		fmt.Print("remoteName: Should not be empty\n\n")
+		flag.Usage()
 		return
 	}
 	http.HandleFunc("/api/rcode", func(writer http.ResponseWriter, request *http.Request) {
@@ -46,7 +49,7 @@ where 'path' is the path you want to open in vscode.
 			}
 			remotePath := string(body)
 			cmd := exec.Command(code, "--folder-uri",
-				fmt.Sprintf("vscode://ssh-remote%%2B%v/%v", remoteName, remotePath))
+				fmt.Sprintf("vscode-remote://ssh-remote%%2B%v%v", remoteName, remotePath))
 			err = cmd.Run()
 			if err != nil {
 				request.Response.StatusCode = http.StatusInternalServerError
