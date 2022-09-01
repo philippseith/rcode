@@ -21,7 +21,8 @@ On the host:
 On the client:
 - modify `rcode.sh` for your needs and put it into your path
 ## Usage
-Run `rcode -address host:port -remote someremote` on the the host and
-change to the desired path on the client and run `rcode .`
+Run `rcode -address host:port -remote someremote` on the host and
+change to the desired path on the client 
+(the machine which is named `someremote` in the vscode Remote Explorer on the host) and run `rcode .`
 
 A new vscode window with the remote folder will be opened.
