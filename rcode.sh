@@ -1,3 +1,5 @@
+#!/usr/bin/bash
+
 function abspath() {
     if [ -d "$1" ]; then
         (cd "$1"; pwd)
