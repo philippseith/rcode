@@ -25,7 +25,7 @@ where 'path' is the absolute path you want to open in vscode.
 	}
 	var address, remoteName, code string
 	flag.StringVar(&address, "address", "", "address to bind the server to")
-	flag.StringVar(&remoteName, "remoteName", "", "name of the remote in vscode remote explorer")
+	flag.StringVar(&remoteName, "remote", "", "name of the remote in vscode remote explorer")
 	flag.StringVar(&code, "code", "code", "how to invoke Visual Studio Code")
 	flag.Parse()
 

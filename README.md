@@ -5,15 +5,24 @@
 ## Use Case 
 You are connected via terminal and you want to edit the current folder with vscode on your host.
 
-## Installation
-`go install github.com/philippseith/rcode/cmd/rcode@latest`
+## Prerequisites
 
+On the host:
+- go 1.13 or higher
+
+On the client:
+- curl
+
+## Installation
+
+On the host:
+- `go install github.com/philippseith/rcode/cmd/rcode@latest`
+
+On the client:
+- modify `rcode.sh` for your needs and put it into your path
 ## Usage
-Run `rcode -address host:port -remote someremote` on the the host and
-just `curl -d "path" -X PUT http://host:port/api/rcode` on the remote named `someremote` in your vscode Remote Explorer,
-where `path` is the absolute path you want to open in vscode.
+Run `rcode -address host:port -remote someremote` on the host and
+change to the desired path on the client 
+(the machine which is named `someremote` in the vscode Remote Explorer on the host) and run `rcode .`
 
 A new vscode window with the remote folder will be opened.
-
-## Next
-It should be fairly simple to write some shell scripts/functions to simplify sending the `PUT` with the path
